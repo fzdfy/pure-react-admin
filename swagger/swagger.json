@@ -1,0 +1,101 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Swagger Example API"
+  },
+  "host": "",
+  "basePath": "",
+  "paths": {
+    "/api/sys/user/login": {
+      "post": {
+        "security": [
+          {
+            "BasicAuth": []
+          }
+        ],
+        "description": "user login",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["customer"],
+        "summary": "user login logic",
+        "operationId": "UserLogin",
+        "parameters": [
+          {
+            "description": "Login info",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/types.LoginReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/types.LoginResp"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "types.LoginReq": {
+      "type": "object",
+      "required": ["password", "userName"],
+      "properties": {
+        "password": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        }
+      }
+    },
+    "types.LoginResp": {
+      "type": "object",
+      "required": [
+        "accessExpire",
+        "code",
+        "currentAuthority",
+        "id",
+        "message",
+        "refreshAfter",
+        "status",
+        "token",
+        "userName"
+      ],
+      "properties": {
+        "accessExpire": {
+          "type": "integer"
+        },
+        "code": {
+          "type": "string"
+        },
+        "currentAuthority": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "message": {
+          "type": "string"
+        },
+        "refreshAfter": {
+          "type": "integer"
+        },
+        "status": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

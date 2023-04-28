@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ant-primary-color: #1677ff;
+}
+
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+  background-color: var(--ant-primary-color);
+}
