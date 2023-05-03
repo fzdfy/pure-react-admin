@@ -1,5 +1,6 @@
 import { Result } from 'antd'
 import { lazy } from 'react'
+import { RequireAuth } from 'react-auth-kit'
 import type { RouteObject } from 'react-router-dom'
 import { useRoutes } from 'react-router-dom'
 
@@ -13,7 +14,11 @@ const Login = lazy(() => import('@/pages/sys/login'))
 const appRouterConfig: RouteObject[] = [
   {
     path: '/',
-    element: <PureLayout />,
+    element: (
+      <RequireAuth loginPath='/login'>
+        <PureLayout />
+      </RequireAuth>
+    ),
     children: [
       {
         index: true,
@@ -27,18 +32,16 @@ const appRouterConfig: RouteObject[] = [
         path: 'mms',
         element: <Mms />,
       },
-      // {
-      //   path: '*',
-      //   element: <Result status='404' title='404' subTitle='Sorry, the page you visited does not exist.' />,
-      // },
+      {
+        path: '*',
+        element: <Result status='404' title='404' subTitle='Sorry, the page you visited does not exist.' />,
+      },
     ],
   },
   {
-    path: 'login',
+    path: '/login',
     element: <Login />,
   },
 ]
 
-const Router = () => useRoutes(appRouterConfig)
-
-export default Router
+export default appRouterConfig

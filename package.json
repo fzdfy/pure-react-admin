@@ -23,6 +23,7 @@
     "jotai": "^2.0.4",
     "jotai-immer": "^0.2.0",
     "react": "^18.2.0",
+    "react-auth-kit": "^2.12.2",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
     "react-router-dom": "^6.9.0",

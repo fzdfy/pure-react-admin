@@ -1,24 +1,17 @@
 import { ProConfigProvider } from '@ant-design/pro-components'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { App as RootApp, ConfigProvider } from 'antd'
-import { BrowserRouter } from 'react-router-dom'
+import { useRoutes } from 'react-router-dom'
 
-import AppRouter from './router'
-
-const queryClient = new QueryClient()
+import routerConfig from './router'
 
 function App() {
+  const element = useRoutes(routerConfig)
+
   return (
     <>
       <ConfigProvider>
         <ProConfigProvider>
-          <QueryClientProvider client={queryClient}>
-            <RootApp className='h-screen'>
-              <BrowserRouter>
-                <AppRouter />
-              </BrowserRouter>
-            </RootApp>
-          </QueryClientProvider>
+          <RootApp className='h-screen'>{element}</RootApp>
         </ProConfigProvider>
       </ConfigProvider>
     </>

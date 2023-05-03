@@ -6,6 +6,8 @@ import { Divider, Space } from 'antd'
 import { useAtom } from 'jotai'
 import type { FC } from 'react'
 import { useState } from 'react'
+import { useSignIn } from 'react-auth-kit'
+import { useNavigate } from 'react-router-dom'
 
 import type { TypesLoginReq } from '@/apis'
 import { CustomerApi } from '@/apis'
@@ -20,11 +22,13 @@ const Login: FC = () => {
     cursor: 'pointer',
   `
 
+  const navigate = useNavigate()
+  const signIn = useSignIn()
   const [loginParams, setLoginParams] = useState<TypesLoginReq>()
   const [, setToken] = useAtom(tokenAtom)
   const [, setUser] = useAtom(userAtom)
 
-  useQuery(
+  const dataQuery = useQuery(
     ['userLogin', loginParams],
     () => {
       console.log('userLogin')
@@ -39,10 +43,21 @@ const Login: FC = () => {
           draft.currentAuthority = res.currentAuthority
           draft.userName = res.userName
         })
+        const isSign = signIn({
+          token: res.token,
+          tokenType: 'Bearer',
+          expiresIn: 9999999999,
+          authState: { name: 'admin' },
+        })
+        if (isSign) {
+          navigate('/', { replace: true })
+        }
       },
       enabled: !!loginParams,
     },
   )
+
+  console.log(dataQuery)
 
   return (
     <div className='h-full flex flex-col justify-center items-center'>
@@ -50,7 +65,7 @@ const Login: FC = () => {
         backgroundImageUrl='https://gw.alipayobjects.com/zos/rmsportal/FfdJeJRQWjEeGTpqgBKj.png'
         title='Pure react admin'
         subTitle=' '
-        // loading={dataQuery.isLoading}
+        loading={dataQuery.isFetching}
         submitter={{
           searchConfig: {
             submitText: 'Login',
@@ -59,6 +74,7 @@ const Login: FC = () => {
         onFinish={async (values) => {
           console.log(values)
           setLoginParams(values as TypesLoginReq)
+          return Promise.resolve(true)
         }}
         actions={
           <div
