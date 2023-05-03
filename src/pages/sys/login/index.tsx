@@ -10,7 +10,7 @@ import { useState } from 'react'
 import type { TypesLoginReq } from '@/apis'
 import { CustomerApi } from '@/apis'
 import { tokenAtom } from '@/store/token.atom'
-// import { userAtom } from '@/store/user.atom'
+import { userAtom } from '@/store/user.atom'
 
 const Login: FC = () => {
   const iconStyles = css`
@@ -20,9 +20,9 @@ const Login: FC = () => {
     cursor: 'pointer',
   `
 
-  const [loginParams, setLoginParams] = useState<TypesLoginReq | null>(null)
+  const [loginParams, setLoginParams] = useState<TypesLoginReq>()
   const [, setToken] = useAtom(tokenAtom)
-  // const [, setUser] = useAtom(userAtom)
+  const [, setUser] = useAtom(userAtom)
 
   const dataQuery = useQuery(
     ['userLogin', loginParams],
@@ -33,20 +33,16 @@ const Login: FC = () => {
     {
       onSuccess: (res) => {
         setToken(res.token)
-        // setUser()
-        // setUser((draft) => {
-        //   draft.id = res.id
-        //   draft.status = res.status
-        //   draft.currentAuthority = res.currentAuthority
-        //   draft.userName = res.userName
-        //   draft.accessExpire = res.accessExpire
-        //   draft.refreshAfter = res.refreshAfter
-        // })
+        setUser((draft) => {
+          draft.id = res.id
+          draft.status = res.status
+          draft.currentAuthority = res.currentAuthority
+          draft.userName = res.userName
+        })
       },
       enabled: !!loginParams,
     },
   )
-  console.log('dataQuery', dataQuery)
 
   return (
     <div className='h-full flex flex-col justify-center items-center'>

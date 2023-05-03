@@ -31,6 +31,7 @@ specifiers:
   eslint-plugin-react-hooks: ^4.6.0
   eslint-plugin-simple-import-sort: ^10.0.0
   husky: ^8.0.3
+  immer: ^10.0.1
   jotai: ^2.0.4
   jotai-immer: ^0.2.0
   lint-staged: ^13.2.1
@@ -53,8 +54,9 @@ dependencies:
   '@hookform/resolvers': registry.npmmirror.com/@hookform/resolvers/3.1.0_react-hook-form@7.43.9
   '@tanstack/react-query': registry.npmmirror.com/@tanstack/react-query/4.29.1_biqbaboplfbrettd7655fr4n2y
   antd: registry.npmmirror.com/antd/5.4.2_biqbaboplfbrettd7655fr4n2y
+  immer: registry.npmmirror.com/immer/10.0.1
   jotai: registry.npmmirror.com/jotai/2.0.4_react@18.2.0
-  jotai-immer: registry.npmmirror.com/jotai-immer/0.2.0_jotai@2.0.4+react@18.2.0
+  jotai-immer: registry.npmmirror.com/jotai-immer/0.2.0_tyidqcg5hdyyf2hgqaev7fbs2y
   react: registry.npmmirror.com/react/18.2.0
   react-dom: registry.npmmirror.com/react-dom/18.2.0_react@18.2.0
   react-hook-form: registry.npmmirror.com/react-hook-form/7.43.9_react@18.2.0
@@ -3761,6 +3763,12 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
+  registry.npmmirror.com/immer/10.0.1:
+    resolution: {integrity: sha512-zg++jJLsKKTwXGeSYIw0HgChSYQGtu0UDTnbKx5aGLYgte4CwTmH9eJDYyQ6FheyUtBe+lQW9FrGxya1G+Dtmg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/immer/-/immer-10.0.1.tgz}
+    name: immer
+    version: 10.0.1
+    dev: false
+
   registry.npmmirror.com/import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/import-fresh/-/import-fresh-3.3.0.tgz}
     name: import-fresh
@@ -4067,7 +4075,7 @@ packages:
     hasBin: true
     dev: true
 
-  registry.npmmirror.com/jotai-immer/0.2.0_jotai@2.0.4+react@18.2.0:
+  registry.npmmirror.com/jotai-immer/0.2.0_tyidqcg5hdyyf2hgqaev7fbs2y:
     resolution: {integrity: sha512-hahK8EPiROS9RoNWmX/Z8rY9WkAijspX4BZ1O7umpcwI4kPNkbcCpu/PhiQ8FMcpEcF6KmbpbMpSSj/GFmo8NA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/jotai-immer/-/jotai-immer-0.2.0.tgz}
     id: registry.npmmirror.com/jotai-immer/0.2.0
     name: jotai-immer
@@ -4077,6 +4085,7 @@ packages:
       jotai: '>=1.11.0'
       react: '>=17.0.0'
     dependencies:
+      immer: registry.npmmirror.com/immer/10.0.1
       jotai: registry.npmmirror.com/jotai/2.0.4_react@18.2.0
       react: registry.npmmirror.com/react/18.2.0
     dev: false
