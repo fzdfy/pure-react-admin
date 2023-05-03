@@ -24,7 +24,7 @@ const Login: FC = () => {
   const [, setToken] = useAtom(tokenAtom)
   const [, setUser] = useAtom(userAtom)
 
-  const dataQuery = useQuery(
+  useQuery(
     ['userLogin', loginParams],
     () => {
       console.log('userLogin')
