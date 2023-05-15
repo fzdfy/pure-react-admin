@@ -8,10 +8,10 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     proxy: {
-      '/api/': {
+      '/_/': {
         target: 'http://localhost:8888',
         changeOrigin: true,
-        // rewrite: (path) => path.replace(/^\/_/, ''),
+        rewrite: (path) => path.replace(/^\/_/, ''),
       },
     },
     cors: true,

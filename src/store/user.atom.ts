@@ -5,4 +5,5 @@ export const userAtom = atomWithImmer({
   status: '',
   currentAuthority: '',
   userName: '',
+  avatar: '',
 })

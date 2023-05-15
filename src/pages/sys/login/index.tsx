@@ -9,9 +9,8 @@ import { useState } from 'react'
 import { useSignIn } from 'react-auth-kit'
 import { useNavigate } from 'react-router-dom'
 
-import type { TypesLoginReq } from '@/apis'
-import { CustomerApi } from '@/apis'
-import { tokenAtom } from '@/store/token.atom'
+import { pureApi } from '@/apis/pure.api'
+import type { TypesLoginReq } from '@/request'
 import { userAtom } from '@/store/user.atom'
 
 const Login: FC = () => {
@@ -25,18 +24,20 @@ const Login: FC = () => {
   const navigate = useNavigate()
   const signIn = useSignIn()
   const [loginParams, setLoginParams] = useState<TypesLoginReq>()
-  const [, setToken] = useAtom(tokenAtom)
   const [, setUser] = useAtom(userAtom)
 
-  const dataQuery = useQuery(
-    ['userLogin', loginParams],
+  const { data, isFetching } = useQuery(
+    ['pureApi.userLogin', loginParams],
     () => {
-      console.log('userLogin')
-      return new CustomerApi().userLogin({ body: loginParams! })
+      return pureApi.userLogin({ body: loginParams! })
     },
     {
       onSuccess: (res) => {
-        setToken(res.token)
+        // if (res.code) {
+        //   message.error(res.message)
+        //   return
+        // }
+        // 设置apiKey
         setUser((draft) => {
           draft.id = res.id
           draft.status = res.status
@@ -45,19 +46,19 @@ const Login: FC = () => {
         })
         const isSign = signIn({
           token: res.token,
-          tokenType: 'Bearer',
+          tokenType: '',
           expiresIn: 9999999999,
           authState: { name: 'admin' },
         })
         if (isSign) {
-          navigate('/', { replace: true })
+          setTimeout(() => {
+            navigate('/', { replace: true })
+          }, 500)
         }
       },
       enabled: !!loginParams,
     },
   )
-
-  console.log(dataQuery)
 
   return (
     <div className='h-full flex flex-col justify-center items-center'>
@@ -65,7 +66,7 @@ const Login: FC = () => {
         backgroundImageUrl='https://gw.alipayobjects.com/zos/rmsportal/FfdJeJRQWjEeGTpqgBKj.png'
         title='Pure react admin'
         subTitle=' '
-        loading={dataQuery.isFetching}
+        loading={isFetching}
         submitter={{
           searchConfig: {
             submitText: 'Login',
