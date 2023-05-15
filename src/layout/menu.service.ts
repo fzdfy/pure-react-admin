@@ -2,14 +2,15 @@ import type { MenuDataItem } from '@ant-design/pro-components'
 
 import type { TypesListMenuData } from '@/request'
 
-export const transformMenuData = (menus: TypesListMenuData[]): MenuDataItem[] => {
-  return menus.map((p) => {
-    const children = menus.filter((q) => q.parentId === p.id)
+export const transformMenuData = (menus: TypesListMenuData[], root = true): MenuDataItem[] => {
+  const _menus = root ? menus.filter((p) => p.parentId === 0) : menus
+  return _menus.map((q) => {
+    const children = menus.filter((r) => r.parentId === q.id)
     return {
-      key: p.path,
-      path: p.path,
-      name: p.name,
-      children: children && transformMenuData(children),
+      key: `${q.id}${q.path}`,
+      path: q.path,
+      name: q.name,
+      children: children && transformMenuData(children, false),
       // TODO: icon
       // icon: <IconFont type={v.icon} />,
     }
