@@ -1,17 +1,22 @@
-import { Result } from 'antd'
 import { lazy } from 'react'
 import { RequireAuth } from 'react-auth-kit'
 import type { RouteObject } from 'react-router-dom'
-import { useRoutes } from 'react-router-dom'
 
 import PureLayout from '@/layout/PureLayout'
+import { sysRouter } from '@/pages/sys/router'
 
 const Dashboard = lazy(() => import('@/pages/dashboard'))
 const File = lazy(() => import('@/pages/file'))
 const Mms = lazy(() => import('@/pages/mms'))
+const Welcome = lazy(() => import('@/pages/welcome'))
 const Login = lazy(() => import('@/pages/sys/login'))
+const NotFound = lazy(() => import('@/components/NotFound'))
 
 const appRouterConfig: RouteObject[] = [
+  {
+    path: '/login',
+    element: <Login />,
+  },
   {
     path: '/',
     element: (
@@ -22,7 +27,8 @@ const appRouterConfig: RouteObject[] = [
     children: [
       {
         index: true,
-        element: <Dashboard />,
+        path: 'welcome',
+        element: <Welcome />,
       },
       {
         path: 'file',
@@ -33,14 +39,14 @@ const appRouterConfig: RouteObject[] = [
         element: <Mms />,
       },
       {
+        path: 'system',
+        children: sysRouter,
+      },
+      {
         path: '*',
-        element: <Result status='404' title='404' subTitle='Sorry, the page you visited does not exist.' />,
+        element: <NotFound />,
       },
     ],
-  },
-  {
-    path: '/login',
-    element: <Login />,
   },
 ]
 

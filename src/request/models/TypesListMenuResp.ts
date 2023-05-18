@@ -24,10 +24,22 @@ import { TypesListMenuDataFromJSON, TypesListMenuDataFromJSONTyped, TypesListMen
 export interface TypesListMenuResp {
   /**
    *
+   * @type {string}
+   * @memberof TypesListMenuResp
+   */
+  code: string
+  /**
+   *
    * @type {Array<TypesListMenuData>}
    * @memberof TypesListMenuResp
    */
   data: Array<TypesListMenuData>
+  /**
+   *
+   * @type {string}
+   * @memberof TypesListMenuResp
+   */
+  message: string
   /**
    *
    * @type {boolean}
@@ -47,7 +59,9 @@ export interface TypesListMenuResp {
  */
 export function instanceOfTypesListMenuResp(value: object): boolean {
   let isInstance = true
+  isInstance = isInstance && 'code' in value
   isInstance = isInstance && 'data' in value
+  isInstance = isInstance && 'message' in value
   isInstance = isInstance && 'success' in value
   isInstance = isInstance && 'total' in value
 
@@ -63,7 +77,9 @@ export function TypesListMenuRespFromJSONTyped(json: any, ignoreDiscriminator: b
     return json
   }
   return {
+    code: json['code'],
     data: (json['data'] as Array<any>).map(TypesListMenuDataFromJSON),
+    message: json['message'],
     success: json['success'],
     total: json['total'],
   }
@@ -77,7 +93,9 @@ export function TypesListMenuRespToJSON(value?: TypesListMenuResp | null): any {
     return null
   }
   return {
+    code: value.code,
     data: (value.data as Array<any>).map(TypesListMenuDataToJSON),
+    message: value.message,
     success: value.success,
     total: value.total,
   }

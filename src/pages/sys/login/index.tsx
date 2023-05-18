@@ -46,7 +46,7 @@ const Login: FC = () => {
         })
         const isSign = signIn({
           token: res.token,
-          tokenType: '',
+          tokenType: 'Bearer',
           expiresIn: 9999999999,
           authState: { name: 'admin' },
         })

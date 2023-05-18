@@ -13,10 +13,12 @@
  */
 
 import * as runtime from '../runtime'
-import type { TypesListMenuResp, TypesLoginReq, TypesLoginResp, TypesUserInfoResp } from '../models'
+import type { TypesListMenuResp, TypesListUserResp, TypesLoginReq, TypesLoginResp, TypesUserInfoResp } from '../models'
 import {
   TypesListMenuRespFromJSON,
   TypesListMenuRespToJSON,
+  TypesListUserRespFromJSON,
+  TypesListUserRespToJSON,
   TypesLoginReqFromJSON,
   TypesLoginReqToJSON,
   TypesLoginRespFromJSON,
@@ -32,6 +34,16 @@ export interface MenuListRequest {
 
 export interface UserInfoRequest {
   userId: string
+}
+
+export interface UserListRequest {
+  current?: number
+  pageSize?: number
+  name?: string
+  nickName?: string
+  mobile?: string
+  email?: string
+  status?: number
 }
 
 export interface UserLoginRequest {
@@ -89,6 +101,34 @@ export interface PureApiInterface {
     requestParameters: UserInfoRequest,
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
   ): Promise<TypesUserInfoResp>
+
+  /**
+   * user list
+   * @summary user list logic
+   * @param {number} [current] List User
+   * @param {number} [pageSize] List User
+   * @param {string} [name] List User
+   * @param {string} [nickName] List User
+   * @param {string} [mobile] List User
+   * @param {string} [email] List User
+   * @param {number} [status] List User
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof PureApiInterface
+   */
+  userListRaw(
+    requestParameters: UserListRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesListUserResp>>
+
+  /**
+   * user list
+   * user list logic
+   */
+  userList(
+    requestParameters: UserListRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesListUserResp>
 
   /**
    * user login
@@ -215,6 +255,75 @@ export class PureApi extends runtime.BaseAPI implements PureApiInterface {
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
   ): Promise<TypesUserInfoResp> {
     const response = await this.userInfoRaw(requestParameters, initOverrides)
+    return await response.value()
+  }
+
+  /**
+   * user list
+   * user list logic
+   */
+  async userListRaw(
+    requestParameters: UserListRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesListUserResp>> {
+    const queryParameters: any = {}
+
+    if (requestParameters.current !== undefined) {
+      queryParameters['Current'] = requestParameters.current
+    }
+
+    if (requestParameters.pageSize !== undefined) {
+      queryParameters['PageSize'] = requestParameters.pageSize
+    }
+
+    if (requestParameters.name !== undefined) {
+      queryParameters['Name'] = requestParameters.name
+    }
+
+    if (requestParameters.nickName !== undefined) {
+      queryParameters['NickName'] = requestParameters.nickName
+    }
+
+    if (requestParameters.mobile !== undefined) {
+      queryParameters['Mobile'] = requestParameters.mobile
+    }
+
+    if (requestParameters.email !== undefined) {
+      queryParameters['Email'] = requestParameters.email
+    }
+
+    if (requestParameters.status !== undefined) {
+      queryParameters['Status'] = requestParameters.status
+    }
+
+    const headerParameters: runtime.HTTPHeaders = {}
+
+    if (this.configuration && this.configuration.apiKey) {
+      headerParameters['Authorization'] = this.configuration.apiKey('Authorization') // ApiKeyAuth authentication
+    }
+
+    const response = await this.request(
+      {
+        path: `/api/sys/user/list`,
+        method: 'GET',
+        headers: headerParameters,
+        query: queryParameters,
+      },
+      initOverrides,
+    )
+
+    return new runtime.JSONApiResponse(response, (jsonValue) => TypesListUserRespFromJSON(jsonValue))
+  }
+
+  /**
+   * user list
+   * user list logic
+   */
+  async userList(
+    requestParameters: UserListRequest = {},
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesListUserResp> {
+    const response = await this.userListRaw(requestParameters, initOverrides)
     return await response.value()
   }
 

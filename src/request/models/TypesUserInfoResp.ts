@@ -30,6 +30,18 @@ export interface TypesUserInfoResp {
    * @type {string}
    * @memberof TypesUserInfoResp
    */
+  code: string
+  /**
+   *
+   * @type {string}
+   * @memberof TypesUserInfoResp
+   */
+  message: string
+  /**
+   *
+   * @type {string}
+   * @memberof TypesUserInfoResp
+   */
   name: string
 }
 
@@ -39,6 +51,8 @@ export interface TypesUserInfoResp {
 export function instanceOfTypesUserInfoResp(value: object): boolean {
   let isInstance = true
   isInstance = isInstance && 'avatar' in value
+  isInstance = isInstance && 'code' in value
+  isInstance = isInstance && 'message' in value
   isInstance = isInstance && 'name' in value
 
   return isInstance
@@ -54,6 +68,8 @@ export function TypesUserInfoRespFromJSONTyped(json: any, ignoreDiscriminator: b
   }
   return {
     avatar: json['avatar'],
+    code: json['code'],
+    message: json['message'],
     name: json['name'],
   }
 }
@@ -67,6 +83,8 @@ export function TypesUserInfoRespToJSON(value?: TypesUserInfoResp | null): any {
   }
   return {
     avatar: value.avatar,
+    code: value.code,
+    message: value.message,
     name: value.name,
   }
 }

@@ -1,12 +1,11 @@
 import { lazy } from 'react'
 import type { RouteObject } from 'react-router-dom'
 
-const Login = lazy(() => import('@/pages/sys/login'))
+const List = lazy(() => import('@/pages/sys/user'))
 
-const routerConfig: RouteObject[] = [
+export const sysRouter: RouteObject[] = [
   {
-    path: 'login',
-    element: <Login />,
+    path: 'user/list',
+    element: <List />,
   },
 ]
-export default routerConfig
