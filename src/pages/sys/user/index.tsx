@@ -7,7 +7,7 @@ import { useRef } from 'react'
 
 import { pureApi } from '@/apis/pure.api'
 import type { UserListRequest } from '@/request'
-import { getTableData } from '@/utils/table.setvice'
+import { getTableData } from '@/utils/table.service'
 
 const columns: ProColumns[] = [
   {
