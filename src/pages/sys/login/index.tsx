@@ -10,7 +10,7 @@ import { useSignIn } from 'react-auth-kit'
 import { useNavigate } from 'react-router-dom'
 
 import { pureApi } from '@/apis/pure.api'
-import type { TypesLoginReq } from '@/request'
+import type { UserLoginRequest } from '@/request'
 import { userAtom } from '@/store/user.atom'
 
 const Login: FC = () => {
@@ -23,13 +23,13 @@ const Login: FC = () => {
 
   const navigate = useNavigate()
   const signIn = useSignIn()
-  const [loginParams, setLoginParams] = useState<TypesLoginReq>()
+  const [loginParams, setLoginParams] = useState<UserLoginRequest>()
   const [, setUser] = useAtom(userAtom)
 
   const { data, isFetching } = useQuery(
     ['pureApi.userLogin', loginParams],
     () => {
-      return pureApi.userLogin({ body: loginParams! })
+      return pureApi.userLogin(loginParams!)
     },
     {
       onSuccess: (res) => {
@@ -74,7 +74,7 @@ const Login: FC = () => {
         }}
         onFinish={async (values) => {
           console.log(values)
-          setLoginParams(values as TypesLoginReq)
+          setLoginParams({ userLogin: values } as UserLoginRequest)
           return Promise.resolve(true)
         }}
         actions={

@@ -5,8 +5,8 @@ models/TypesListMenuData.ts
 models/TypesListMenuResp.ts
 models/TypesListUserData.ts
 models/TypesListUserResp.ts
-models/TypesLoginReq.ts
-models/TypesLoginResp.ts
 models/TypesUserInfoResp.ts
+models/TypesUserLoginReq.ts
+models/TypesUserLoginResp.ts
 models/index.ts
 runtime.ts

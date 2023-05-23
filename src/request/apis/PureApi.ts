@@ -13,18 +13,24 @@
  */
 
 import * as runtime from '../runtime'
-import type { TypesListMenuResp, TypesListUserResp, TypesLoginReq, TypesLoginResp, TypesUserInfoResp } from '../models'
+import type {
+  TypesListMenuResp,
+  TypesListUserResp,
+  TypesUserInfoResp,
+  TypesUserLoginReq,
+  TypesUserLoginResp,
+} from '../models'
 import {
   TypesListMenuRespFromJSON,
   TypesListMenuRespToJSON,
   TypesListUserRespFromJSON,
   TypesListUserRespToJSON,
-  TypesLoginReqFromJSON,
-  TypesLoginReqToJSON,
-  TypesLoginRespFromJSON,
-  TypesLoginRespToJSON,
   TypesUserInfoRespFromJSON,
   TypesUserInfoRespToJSON,
+  TypesUserLoginReqFromJSON,
+  TypesUserLoginReqToJSON,
+  TypesUserLoginRespFromJSON,
+  TypesUserLoginRespToJSON,
 } from '../models'
 
 export interface MenuListRequest {
@@ -47,7 +53,7 @@ export interface UserListRequest {
 }
 
 export interface UserLoginRequest {
-  body: TypesLoginReq
+  userLogin: TypesUserLoginReq
 }
 
 /**
@@ -133,7 +139,7 @@ export interface PureApiInterface {
   /**
    * user login
    * @summary user login logic
-   * @param {TypesLoginReq} body Login info
+   * @param {TypesUserLoginReq} userLogin Login info
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof PureApiInterface
@@ -141,7 +147,7 @@ export interface PureApiInterface {
   userLoginRaw(
     requestParameters: UserLoginRequest,
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<TypesLoginResp>>
+  ): Promise<runtime.ApiResponse<TypesUserLoginResp>>
 
   /**
    * user login
@@ -150,7 +156,7 @@ export interface PureApiInterface {
   userLogin(
     requestParameters: UserLoginRequest,
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<TypesLoginResp>
+  ): Promise<TypesUserLoginResp>
 }
 
 /**
@@ -168,11 +174,11 @@ export class PureApi extends runtime.BaseAPI implements PureApiInterface {
     const queryParameters: any = {}
 
     if (requestParameters.name !== undefined) {
-      queryParameters['Name'] = requestParameters.name
+      queryParameters['name'] = requestParameters.name
     }
 
     if (requestParameters.path !== undefined) {
-      queryParameters['Path'] = requestParameters.path
+      queryParameters['path'] = requestParameters.path
     }
 
     const headerParameters: runtime.HTTPHeaders = {}
@@ -269,31 +275,31 @@ export class PureApi extends runtime.BaseAPI implements PureApiInterface {
     const queryParameters: any = {}
 
     if (requestParameters.current !== undefined) {
-      queryParameters['Current'] = requestParameters.current
+      queryParameters['current'] = requestParameters.current
     }
 
     if (requestParameters.pageSize !== undefined) {
-      queryParameters['PageSize'] = requestParameters.pageSize
+      queryParameters['pageSize'] = requestParameters.pageSize
     }
 
     if (requestParameters.name !== undefined) {
-      queryParameters['Name'] = requestParameters.name
+      queryParameters['name'] = requestParameters.name
     }
 
     if (requestParameters.nickName !== undefined) {
-      queryParameters['NickName'] = requestParameters.nickName
+      queryParameters['nickName'] = requestParameters.nickName
     }
 
     if (requestParameters.mobile !== undefined) {
-      queryParameters['Mobile'] = requestParameters.mobile
+      queryParameters['mobile'] = requestParameters.mobile
     }
 
     if (requestParameters.email !== undefined) {
-      queryParameters['Email'] = requestParameters.email
+      queryParameters['email'] = requestParameters.email
     }
 
     if (requestParameters.status !== undefined) {
-      queryParameters['Status'] = requestParameters.status
+      queryParameters['status'] = requestParameters.status
     }
 
     const headerParameters: runtime.HTTPHeaders = {}
@@ -334,11 +340,11 @@ export class PureApi extends runtime.BaseAPI implements PureApiInterface {
   async userLoginRaw(
     requestParameters: UserLoginRequest,
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<TypesLoginResp>> {
-    if (requestParameters.body === null || requestParameters.body === undefined) {
+  ): Promise<runtime.ApiResponse<TypesUserLoginResp>> {
+    if (requestParameters.userLogin === null || requestParameters.userLogin === undefined) {
       throw new runtime.RequiredError(
-        'body',
-        'Required parameter requestParameters.body was null or undefined when calling userLogin.',
+        'userLogin',
+        'Required parameter requestParameters.userLogin was null or undefined when calling userLogin.',
       )
     }
 
@@ -354,12 +360,12 @@ export class PureApi extends runtime.BaseAPI implements PureApiInterface {
         method: 'POST',
         headers: headerParameters,
         query: queryParameters,
-        body: TypesLoginReqToJSON(requestParameters.body),
+        body: TypesUserLoginReqToJSON(requestParameters.userLogin),
       },
       initOverrides,
     )
 
-    return new runtime.JSONApiResponse(response, (jsonValue) => TypesLoginRespFromJSON(jsonValue))
+    return new runtime.JSONApiResponse(response, (jsonValue) => TypesUserLoginRespFromJSON(jsonValue))
   }
 
   /**
@@ -369,7 +375,7 @@ export class PureApi extends runtime.BaseAPI implements PureApiInterface {
   async userLogin(
     requestParameters: UserLoginRequest,
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<TypesLoginResp> {
+  ): Promise<TypesUserLoginResp> {
     const response = await this.userLoginRaw(requestParameters, initOverrides)
     return await response.value()
   }

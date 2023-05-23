@@ -16,57 +16,57 @@ import { exists, mapValues } from '../runtime'
 /**
  *
  * @export
- * @interface TypesLoginResp
+ * @interface TypesUserLoginResp
  */
-export interface TypesLoginResp {
+export interface TypesUserLoginResp {
   /**
    *
    * @type {number}
-   * @memberof TypesLoginResp
+   * @memberof TypesUserLoginResp
    */
   accessExpire: number
   /**
    *
    * @type {string}
-   * @memberof TypesLoginResp
+   * @memberof TypesUserLoginResp
    */
   currentAuthority: string
   /**
    *
    * @type {number}
-   * @memberof TypesLoginResp
+   * @memberof TypesUserLoginResp
    */
   id: number
   /**
    *
    * @type {number}
-   * @memberof TypesLoginResp
+   * @memberof TypesUserLoginResp
    */
   refreshAfter: number
   /**
    *
    * @type {string}
-   * @memberof TypesLoginResp
+   * @memberof TypesUserLoginResp
    */
   status: string
   /**
    *
    * @type {string}
-   * @memberof TypesLoginResp
+   * @memberof TypesUserLoginResp
    */
   token: string
   /**
    *
    * @type {string}
-   * @memberof TypesLoginResp
+   * @memberof TypesUserLoginResp
    */
   userName: string
 }
 
 /**
- * Check if a given object implements the TypesLoginResp interface.
+ * Check if a given object implements the TypesUserLoginResp interface.
  */
-export function instanceOfTypesLoginResp(value: object): boolean {
+export function instanceOfTypesUserLoginResp(value: object): boolean {
   let isInstance = true
   isInstance = isInstance && 'accessExpire' in value
   isInstance = isInstance && 'currentAuthority' in value
@@ -79,11 +79,11 @@ export function instanceOfTypesLoginResp(value: object): boolean {
   return isInstance
 }
 
-export function TypesLoginRespFromJSON(json: any): TypesLoginResp {
-  return TypesLoginRespFromJSONTyped(json, false)
+export function TypesUserLoginRespFromJSON(json: any): TypesUserLoginResp {
+  return TypesUserLoginRespFromJSONTyped(json, false)
 }
 
-export function TypesLoginRespFromJSONTyped(json: any, ignoreDiscriminator: boolean): TypesLoginResp {
+export function TypesUserLoginRespFromJSONTyped(json: any, ignoreDiscriminator: boolean): TypesUserLoginResp {
   if (json === undefined || json === null) {
     return json
   }
@@ -98,7 +98,7 @@ export function TypesLoginRespFromJSONTyped(json: any, ignoreDiscriminator: bool
   }
 }
 
-export function TypesLoginRespToJSON(value?: TypesLoginResp | null): any {
+export function TypesUserLoginRespToJSON(value?: TypesUserLoginResp | null): any {
   if (value === undefined) {
     return undefined
   }

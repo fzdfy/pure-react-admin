@@ -6,7 +6,7 @@ import type { FC } from 'react'
 import { useRef } from 'react'
 
 import { pureApi } from '@/apis/pure.api'
-import type { UserListRequest } from '@/request'
+import type { TypesListMenuResp, UserListRequest } from '@/request'
 import { getTableData } from '@/utils/table.service'
 
 const columns: ProColumns[] = [
@@ -120,14 +120,14 @@ const columns: ProColumns[] = [
 ]
 
 const getUserList = () => {
-  return getTableData(() => pureApi.userList())
+  return getTableData((params?: UserListRequest) => pureApi.userList(params))
 }
 
 const UserList: FC = () => {
   const ref = useRef<ActionType>()
   return (
     <PageContainer>
-      <ProTable
+      <ProTable<TypesListMenuResp, UserListRequest>
         actionRef={ref}
         rowKey='id'
         columns={columns}

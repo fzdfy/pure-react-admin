@@ -16,27 +16,27 @@ import { exists, mapValues } from '../runtime'
 /**
  *
  * @export
- * @interface TypesLoginReq
+ * @interface TypesUserLoginReq
  */
-export interface TypesLoginReq {
+export interface TypesUserLoginReq {
   /**
    *
    * @type {string}
-   * @memberof TypesLoginReq
+   * @memberof TypesUserLoginReq
    */
   password: string
   /**
    *
    * @type {string}
-   * @memberof TypesLoginReq
+   * @memberof TypesUserLoginReq
    */
   userName: string
 }
 
 /**
- * Check if a given object implements the TypesLoginReq interface.
+ * Check if a given object implements the TypesUserLoginReq interface.
  */
-export function instanceOfTypesLoginReq(value: object): boolean {
+export function instanceOfTypesUserLoginReq(value: object): boolean {
   let isInstance = true
   isInstance = isInstance && 'password' in value
   isInstance = isInstance && 'userName' in value
@@ -44,11 +44,11 @@ export function instanceOfTypesLoginReq(value: object): boolean {
   return isInstance
 }
 
-export function TypesLoginReqFromJSON(json: any): TypesLoginReq {
-  return TypesLoginReqFromJSONTyped(json, false)
+export function TypesUserLoginReqFromJSON(json: any): TypesUserLoginReq {
+  return TypesUserLoginReqFromJSONTyped(json, false)
 }
 
-export function TypesLoginReqFromJSONTyped(json: any, ignoreDiscriminator: boolean): TypesLoginReq {
+export function TypesUserLoginReqFromJSONTyped(json: any, ignoreDiscriminator: boolean): TypesUserLoginReq {
   if (json === undefined || json === null) {
     return json
   }
@@ -58,7 +58,7 @@ export function TypesLoginReqFromJSONTyped(json: any, ignoreDiscriminator: boole
   }
 }
 
-export function TypesLoginReqToJSON(value?: TypesLoginReq | null): any {
+export function TypesUserLoginReqToJSON(value?: TypesUserLoginReq | null): any {
   if (value === undefined) {
     return undefined
   }

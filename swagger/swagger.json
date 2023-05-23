@@ -34,13 +34,13 @@
           {
             "type": "string",
             "description": "List Menu",
-            "name": "Name",
+            "name": "name",
             "in": "query"
           },
           {
             "type": "string",
             "description": "List Menu",
-            "name": "Path",
+            "name": "path",
             "in": "query"
           }
         ],
@@ -103,43 +103,43 @@
           {
             "type": "integer",
             "description": "List User",
-            "name": "Current",
+            "name": "current",
             "in": "query"
           },
           {
             "type": "integer",
             "description": "List User",
-            "name": "PageSize",
+            "name": "pageSize",
             "in": "query"
           },
           {
             "type": "string",
             "description": "List User",
-            "name": "Name",
+            "name": "name",
             "in": "query"
           },
           {
             "type": "string",
             "description": "List User",
-            "name": "NickName",
+            "name": "nickName",
             "in": "query"
           },
           {
             "type": "string",
             "description": "List User",
-            "name": "Mobile",
+            "name": "mobile",
             "in": "query"
           },
           {
             "type": "string",
             "description": "List User",
-            "name": "Email",
+            "name": "email",
             "in": "query"
           },
           {
             "type": "integer",
             "description": "List User",
-            "name": "Status",
+            "name": "status",
             "in": "query"
           }
         ],
@@ -164,11 +164,11 @@
         "parameters": [
           {
             "description": "Login info",
-            "name": "body",
+            "name": "userLogin",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/types.LoginReq"
+              "$ref": "#/definitions/types.UserLoginReq"
             }
           }
         ],
@@ -176,7 +176,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/types.LoginResp"
+              "$ref": "#/definitions/types.UserLoginResp"
             }
           }
         }
@@ -387,7 +387,25 @@
         }
       }
     },
-    "types.LoginReq": {
+    "types.UserInfoResp": {
+      "type": "object",
+      "required": ["avatar", "code", "message", "name"],
+      "properties": {
+        "avatar": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "types.UserLoginReq": {
       "type": "object",
       "required": ["password", "userName"],
       "properties": {
@@ -399,7 +417,7 @@
         }
       }
     },
-    "types.LoginResp": {
+    "types.UserLoginResp": {
       "type": "object",
       "required": ["accessExpire", "currentAuthority", "id", "refreshAfter", "status", "token", "userName"],
       "properties": {
@@ -422,24 +440,6 @@
           "type": "string"
         },
         "userName": {
-          "type": "string"
-        }
-      }
-    },
-    "types.UserInfoResp": {
-      "type": "object",
-      "required": ["avatar", "code", "message", "name"],
-      "properties": {
-        "avatar": {
-          "type": "string"
-        },
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "name": {
           "type": "string"
         }
       }
