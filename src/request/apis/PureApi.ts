@@ -16,6 +16,8 @@ import * as runtime from '../runtime'
 import type {
   TypesAddUserReq,
   TypesAddUserResp,
+  TypesDeleteUserReq,
+  TypesDeleteUserResp,
   TypesListMenuResp,
   TypesListUserResp,
   TypesUpdateUserReq,
@@ -29,6 +31,10 @@ import {
   TypesAddUserReqToJSON,
   TypesAddUserRespFromJSON,
   TypesAddUserRespToJSON,
+  TypesDeleteUserReqFromJSON,
+  TypesDeleteUserReqToJSON,
+  TypesDeleteUserRespFromJSON,
+  TypesDeleteUserRespToJSON,
   TypesListMenuRespFromJSON,
   TypesListMenuRespToJSON,
   TypesListUserRespFromJSON,
@@ -52,6 +58,10 @@ export interface MenuListRequest {
 
 export interface UserAddRequest {
   body: TypesAddUserReq
+}
+
+export interface UserDeleteRequest {
+  body: TypesDeleteUserReq
 }
 
 export interface UserInfoRequest {
@@ -127,6 +137,28 @@ export interface PureApiInterface {
     requestParameters: UserAddRequest,
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
   ): Promise<TypesAddUserResp>
+
+  /**
+   * user delete
+   * @summary user delete logic
+   * @param {TypesDeleteUserReq} body user delete
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof PureApiInterface
+   */
+  userDeleteRaw(
+    requestParameters: UserDeleteRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesDeleteUserResp>>
+
+  /**
+   * user delete
+   * user delete logic
+   */
+  userDelete(
+    requestParameters: UserDeleteRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesDeleteUserResp>
 
   /**
    * user info
@@ -320,6 +352,53 @@ export class PureApi extends runtime.BaseAPI implements PureApiInterface {
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
   ): Promise<TypesAddUserResp> {
     const response = await this.userAddRaw(requestParameters, initOverrides)
+    return await response.value()
+  }
+
+  /**
+   * user delete
+   * user delete logic
+   */
+  async userDeleteRaw(
+    requestParameters: UserDeleteRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesDeleteUserResp>> {
+    if (requestParameters.body === null || requestParameters.body === undefined) {
+      throw new runtime.RequiredError(
+        'body',
+        'Required parameter requestParameters.body was null or undefined when calling userDelete.',
+      )
+    }
+
+    const queryParameters: any = {}
+
+    const headerParameters: runtime.HTTPHeaders = {}
+
+    headerParameters['Content-Type'] = 'application/json'
+
+    const response = await this.request(
+      {
+        path: `/api/sys/user/delete`,
+        method: 'POST',
+        headers: headerParameters,
+        query: queryParameters,
+        body: TypesDeleteUserReqToJSON(requestParameters.body),
+      },
+      initOverrides,
+    )
+
+    return new runtime.JSONApiResponse(response, (jsonValue) => TypesDeleteUserRespFromJSON(jsonValue))
+  }
+
+  /**
+   * user delete
+   * user delete logic
+   */
+  async userDelete(
+    requestParameters: UserDeleteRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesDeleteUserResp> {
+    const response = await this.userDeleteRaw(requestParameters, initOverrides)
     return await response.value()
   }
 

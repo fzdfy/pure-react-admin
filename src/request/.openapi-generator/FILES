@@ -3,6 +3,8 @@ apis/index.ts
 index.ts
 models/TypesAddUserReq.ts
 models/TypesAddUserResp.ts
+models/TypesDeleteUserReq.ts
+models/TypesDeleteUserResp.ts
 models/TypesListMenuData.ts
 models/TypesListMenuResp.ts
 models/TypesListUserData.ts

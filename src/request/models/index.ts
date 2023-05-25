@@ -2,6 +2,8 @@
 /* eslint-disable */
 export * from './TypesAddUserReq'
 export * from './TypesAddUserResp'
+export * from './TypesDeleteUserReq'
+export * from './TypesDeleteUserResp'
 export * from './TypesListMenuData'
 export * from './TypesListMenuResp'
 export * from './TypesListUserData'
