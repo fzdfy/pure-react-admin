@@ -4,12 +4,15 @@ import { Modal } from 'antd'
 import type { FC } from 'react'
 
 const AntDModal: FC<ModalProps> = (props) => {
-  const { children, title } = props
+  const { children, title, onOk } = props
   const modal = useModal()
   return (
     <Modal
       title={title}
-      onOk={() => modal.hide()}
+      onOk={(e) => {
+        onOk && onOk(e)
+        modal.hide()
+      }}
       open={modal.visible}
       onCancel={() => modal.hide()}
       afterClose={() => modal.remove()}>

@@ -2,16 +2,16 @@ import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns } from '@ant-design/pro-components'
 import { PageContainer, ProTable } from '@ant-design/pro-components'
 import NiceModal from '@ebay/nice-modal-react'
-import { Button, Divider } from 'antd'
+import { Button, Divider, Typography } from 'antd'
 import type { FC } from 'react'
 import { useRef } from 'react'
 
 import { pureApi } from '@/apis/pure.api'
 import { formDrawer } from '@/components/form'
+import AntdModal from '@/components/modal'
 import type { TypesListMenuResp, UserListRequest } from '@/request'
 import { getTableData } from '@/utils/table.service'
 
-// import MyAntdModal from './my-antd-modal'
 import { addUserSchema } from './schema/add.schema'
 import { updateUserSchema } from './schema/update.schema'
 
@@ -22,8 +22,16 @@ const getUserList = () => {
 const UserList: FC = () => {
   const ref = useRef<ActionType>()
 
-  const showDeleteUserModal = () => {
-    // NiceModal.show()
+  const showDeleteUserModal = (record: any) => {
+    NiceModal.show(AntdModal, {
+      title: <Typography.Title>删除用户</Typography.Title>,
+      children: <Typography.Text>确认删除{record.name}?</Typography.Text>,
+      onOk: () => {
+        pureApi.userDelete({ body: { id: record.id } }).then(() => {
+          ref.current?.reload()
+        })
+      },
+    })
   }
 
   const columns: ProColumns[] = [
@@ -114,7 +122,7 @@ const UserList: FC = () => {
             danger
             icon={<DeleteOutlined />}
             onClick={() => {
-              // showDeleteConfirm(record)
+              showDeleteUserModal(record)
             }}>
             删除
           </Button>
