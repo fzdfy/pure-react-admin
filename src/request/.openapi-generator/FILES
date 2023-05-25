@@ -1,10 +1,14 @@
 apis/PureApi.ts
 apis/index.ts
 index.ts
+models/TypesAddUserReq.ts
+models/TypesAddUserResp.ts
 models/TypesListMenuData.ts
 models/TypesListMenuResp.ts
 models/TypesListUserData.ts
 models/TypesListUserResp.ts
+models/TypesUpdateUserReq.ts
+models/TypesUpdateUserResp.ts
 models/TypesUserInfoResp.ts
 models/TypesUserLoginReq.ts
 models/TypesUserLoginResp.ts

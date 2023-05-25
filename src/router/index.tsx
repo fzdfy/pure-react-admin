@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 import { RequireAuth } from 'react-auth-kit'
 import type { RouteObject } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 import PureLayout from '@/layout/PureLayout'
 import { sysRouter } from '@/pages/sys/router'
@@ -10,7 +11,7 @@ const File = lazy(() => import('@/pages/file'))
 const Mms = lazy(() => import('@/pages/mms'))
 const Welcome = lazy(() => import('@/pages/welcome'))
 const Login = lazy(() => import('@/pages/sys/login'))
-const NotFound = lazy(() => import('@/components/NotFound'))
+const NotFound = lazy(() => import('@/components/notFound'))
 
 const appRouterConfig: RouteObject[] = [
   {

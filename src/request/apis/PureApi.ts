@@ -14,17 +14,29 @@
 
 import * as runtime from '../runtime'
 import type {
+  TypesAddUserReq,
+  TypesAddUserResp,
   TypesListMenuResp,
   TypesListUserResp,
+  TypesUpdateUserReq,
+  TypesUpdateUserResp,
   TypesUserInfoResp,
   TypesUserLoginReq,
   TypesUserLoginResp,
 } from '../models'
 import {
+  TypesAddUserReqFromJSON,
+  TypesAddUserReqToJSON,
+  TypesAddUserRespFromJSON,
+  TypesAddUserRespToJSON,
   TypesListMenuRespFromJSON,
   TypesListMenuRespToJSON,
   TypesListUserRespFromJSON,
   TypesListUserRespToJSON,
+  TypesUpdateUserReqFromJSON,
+  TypesUpdateUserReqToJSON,
+  TypesUpdateUserRespFromJSON,
+  TypesUpdateUserRespToJSON,
   TypesUserInfoRespFromJSON,
   TypesUserInfoRespToJSON,
   TypesUserLoginReqFromJSON,
@@ -36,6 +48,10 @@ import {
 export interface MenuListRequest {
   name?: string
   path?: string
+}
+
+export interface UserAddRequest {
+  body: TypesAddUserReq
 }
 
 export interface UserInfoRequest {
@@ -54,6 +70,10 @@ export interface UserListRequest {
 
 export interface UserLoginRequest {
   userLogin: TypesUserLoginReq
+}
+
+export interface UserUpdateRequest {
+  body: TypesUpdateUserReq
 }
 
 /**
@@ -85,6 +105,28 @@ export interface PureApiInterface {
     requestParameters: MenuListRequest,
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
   ): Promise<TypesListMenuResp>
+
+  /**
+   * user add
+   * @summary user add logic
+   * @param {TypesAddUserReq} body user add
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof PureApiInterface
+   */
+  userAddRaw(
+    requestParameters: UserAddRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesAddUserResp>>
+
+  /**
+   * user add
+   * user add logic
+   */
+  userAdd(
+    requestParameters: UserAddRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesAddUserResp>
 
   /**
    * user info
@@ -157,6 +199,28 @@ export interface PureApiInterface {
     requestParameters: UserLoginRequest,
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
   ): Promise<TypesUserLoginResp>
+
+  /**
+   * user update
+   * @summary user update logic
+   * @param {TypesUpdateUserReq} body user update
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof PureApiInterface
+   */
+  userUpdateRaw(
+    requestParameters: UserUpdateRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesUpdateUserResp>>
+
+  /**
+   * user update
+   * user update logic
+   */
+  userUpdate(
+    requestParameters: UserUpdateRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesUpdateUserResp>
 }
 
 /**
@@ -209,6 +273,53 @@ export class PureApi extends runtime.BaseAPI implements PureApiInterface {
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
   ): Promise<TypesListMenuResp> {
     const response = await this.menuListRaw(requestParameters, initOverrides)
+    return await response.value()
+  }
+
+  /**
+   * user add
+   * user add logic
+   */
+  async userAddRaw(
+    requestParameters: UserAddRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesAddUserResp>> {
+    if (requestParameters.body === null || requestParameters.body === undefined) {
+      throw new runtime.RequiredError(
+        'body',
+        'Required parameter requestParameters.body was null or undefined when calling userAdd.',
+      )
+    }
+
+    const queryParameters: any = {}
+
+    const headerParameters: runtime.HTTPHeaders = {}
+
+    headerParameters['Content-Type'] = 'application/json'
+
+    const response = await this.request(
+      {
+        path: `/api/sys/user/add`,
+        method: 'POST',
+        headers: headerParameters,
+        query: queryParameters,
+        body: TypesAddUserReqToJSON(requestParameters.body),
+      },
+      initOverrides,
+    )
+
+    return new runtime.JSONApiResponse(response, (jsonValue) => TypesAddUserRespFromJSON(jsonValue))
+  }
+
+  /**
+   * user add
+   * user add logic
+   */
+  async userAdd(
+    requestParameters: UserAddRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesAddUserResp> {
+    const response = await this.userAddRaw(requestParameters, initOverrides)
     return await response.value()
   }
 
@@ -377,6 +488,53 @@ export class PureApi extends runtime.BaseAPI implements PureApiInterface {
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
   ): Promise<TypesUserLoginResp> {
     const response = await this.userLoginRaw(requestParameters, initOverrides)
+    return await response.value()
+  }
+
+  /**
+   * user update
+   * user update logic
+   */
+  async userUpdateRaw(
+    requestParameters: UserUpdateRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesUpdateUserResp>> {
+    if (requestParameters.body === null || requestParameters.body === undefined) {
+      throw new runtime.RequiredError(
+        'body',
+        'Required parameter requestParameters.body was null or undefined when calling userUpdate.',
+      )
+    }
+
+    const queryParameters: any = {}
+
+    const headerParameters: runtime.HTTPHeaders = {}
+
+    headerParameters['Content-Type'] = 'application/json'
+
+    const response = await this.request(
+      {
+        path: `/api/sys/user/update`,
+        method: 'POST',
+        headers: headerParameters,
+        query: queryParameters,
+        body: TypesUpdateUserReqToJSON(requestParameters.body),
+      },
+      initOverrides,
+    )
+
+    return new runtime.JSONApiResponse(response, (jsonValue) => TypesUpdateUserRespFromJSON(jsonValue))
+  }
+
+  /**
+   * user update
+   * user update logic
+   */
+  async userUpdate(
+    requestParameters: UserUpdateRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesUpdateUserResp> {
+    const response = await this.userUpdateRaw(requestParameters, initOverrides)
     return await response.value()
   }
 }

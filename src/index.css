@@ -1,4 +1,11 @@
 @tailwind base;
+/* Tailwind 导致 antd 的 button icon svg 不居中的 bug */
+@layer base {
+  svg {
+    display: inline;
+    vertical-align: baseline;
+  }
+}
 @tailwind components;
 @tailwind utilities;
 
