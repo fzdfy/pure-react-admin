@@ -14,12 +14,25 @@
 
 import * as runtime from '../runtime'
 import type {
+  TypesAddMenuReq,
+  TypesAddMenuResp,
+  TypesAddRoleReq,
+  TypesAddRoleResp,
   TypesAddUserReq,
   TypesAddUserResp,
+  TypesDeleteMenuReq,
+  TypesDeleteMenuResp,
+  TypesDeleteRoleReq,
+  TypesDeleteRoleResp,
   TypesDeleteUserReq,
   TypesDeleteUserResp,
   TypesListMenuResp,
+  TypesListRoleResp,
   TypesListUserResp,
+  TypesUpdateMenuReq,
+  TypesUpdateMenuResp,
+  TypesUpdateRoleReq,
+  TypesUpdateRoleResp,
   TypesUpdateUserReq,
   TypesUpdateUserResp,
   TypesUserInfoResp,
@@ -27,18 +40,44 @@ import type {
   TypesUserLoginResp,
 } from '../models'
 import {
+  TypesAddMenuReqFromJSON,
+  TypesAddMenuReqToJSON,
+  TypesAddMenuRespFromJSON,
+  TypesAddMenuRespToJSON,
+  TypesAddRoleReqFromJSON,
+  TypesAddRoleReqToJSON,
+  TypesAddRoleRespFromJSON,
+  TypesAddRoleRespToJSON,
   TypesAddUserReqFromJSON,
   TypesAddUserReqToJSON,
   TypesAddUserRespFromJSON,
   TypesAddUserRespToJSON,
+  TypesDeleteMenuReqFromJSON,
+  TypesDeleteMenuReqToJSON,
+  TypesDeleteMenuRespFromJSON,
+  TypesDeleteMenuRespToJSON,
+  TypesDeleteRoleReqFromJSON,
+  TypesDeleteRoleReqToJSON,
+  TypesDeleteRoleRespFromJSON,
+  TypesDeleteRoleRespToJSON,
   TypesDeleteUserReqFromJSON,
   TypesDeleteUserReqToJSON,
   TypesDeleteUserRespFromJSON,
   TypesDeleteUserRespToJSON,
   TypesListMenuRespFromJSON,
   TypesListMenuRespToJSON,
+  TypesListRoleRespFromJSON,
+  TypesListRoleRespToJSON,
   TypesListUserRespFromJSON,
   TypesListUserRespToJSON,
+  TypesUpdateMenuReqFromJSON,
+  TypesUpdateMenuReqToJSON,
+  TypesUpdateMenuRespFromJSON,
+  TypesUpdateMenuRespToJSON,
+  TypesUpdateRoleReqFromJSON,
+  TypesUpdateRoleReqToJSON,
+  TypesUpdateRoleRespFromJSON,
+  TypesUpdateRoleRespToJSON,
   TypesUpdateUserReqFromJSON,
   TypesUpdateUserReqToJSON,
   TypesUpdateUserRespFromJSON,
@@ -51,9 +90,39 @@ import {
   TypesUserLoginRespToJSON,
 } from '../models'
 
+export interface MenuAddRequest {
+  body: TypesAddMenuReq
+}
+
+export interface MenuDeleteRequest {
+  body: TypesDeleteMenuReq
+}
+
 export interface MenuListRequest {
   name?: string
   path?: string
+  status?: number
+}
+
+export interface MenuUpdateRequest {
+  body: TypesUpdateMenuReq
+}
+
+export interface RoleAddRequest {
+  body: TypesAddRoleReq
+}
+
+export interface RoleDeleteRequest {
+  body: TypesDeleteRoleReq
+}
+
+export interface RoleListRequest {
+  name?: string
+  status?: number
+}
+
+export interface RoleUpdateRequest {
+  body: TypesUpdateRoleReq
 }
 
 export interface UserAddRequest {
@@ -94,10 +163,55 @@ export interface UserUpdateRequest {
  */
 export interface PureApiInterface {
   /**
+   * menu add
+   * @summary menu add logic
+   * @param {TypesAddMenuReq} body menu add
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof PureApiInterface
+   */
+  menuAddRaw(
+    requestParameters: MenuAddRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesAddMenuResp>>
+
+  /**
+   * menu add
+   * menu add logic
+   */
+  menuAdd(
+    requestParameters: MenuAddRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesAddMenuResp>
+
+  /**
+   * menu delete
+   * @summary menu delete logic
+   * @param {TypesDeleteMenuReq} body menu delete
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof PureApiInterface
+   */
+  menuDeleteRaw(
+    requestParameters: MenuDeleteRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesDeleteMenuResp>>
+
+  /**
+   * menu delete
+   * menu delete logic
+   */
+  menuDelete(
+    requestParameters: MenuDeleteRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesDeleteMenuResp>
+
+  /**
    * menu list
    * @summary menu list logic
    * @param {string} [name] List Menu
    * @param {string} [path] List Menu
+   * @param {number} [status] List Menu
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof PureApiInterface
@@ -115,6 +229,117 @@ export interface PureApiInterface {
     requestParameters: MenuListRequest,
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
   ): Promise<TypesListMenuResp>
+
+  /**
+   * menu update
+   * @summary menu update logic
+   * @param {TypesUpdateMenuReq} body menu update
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof PureApiInterface
+   */
+  menuUpdateRaw(
+    requestParameters: MenuUpdateRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesUpdateMenuResp>>
+
+  /**
+   * menu update
+   * menu update logic
+   */
+  menuUpdate(
+    requestParameters: MenuUpdateRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesUpdateMenuResp>
+
+  /**
+   * role add
+   * @summary role add logic
+   * @param {TypesAddRoleReq} body role add
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof PureApiInterface
+   */
+  roleAddRaw(
+    requestParameters: RoleAddRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesAddRoleResp>>
+
+  /**
+   * role add
+   * role add logic
+   */
+  roleAdd(
+    requestParameters: RoleAddRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesAddRoleResp>
+
+  /**
+   * role delete
+   * @summary role delete logic
+   * @param {TypesDeleteRoleReq} body role delete
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof PureApiInterface
+   */
+  roleDeleteRaw(
+    requestParameters: RoleDeleteRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesDeleteRoleResp>>
+
+  /**
+   * role delete
+   * role delete logic
+   */
+  roleDelete(
+    requestParameters: RoleDeleteRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesDeleteRoleResp>
+
+  /**
+   * role list
+   * @summary role list logic
+   * @param {string} [name] list role
+   * @param {number} [status] list role
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof PureApiInterface
+   */
+  roleListRaw(
+    requestParameters: RoleListRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesListRoleResp>>
+
+  /**
+   * role list
+   * role list logic
+   */
+  roleList(
+    requestParameters: RoleListRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesListRoleResp>
+
+  /**
+   * role update
+   * @summary role update logic
+   * @param {TypesUpdateRoleReq} body role update
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof PureApiInterface
+   */
+  roleUpdateRaw(
+    requestParameters: RoleUpdateRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesUpdateRoleResp>>
+
+  /**
+   * role update
+   * role update logic
+   */
+  roleUpdate(
+    requestParameters: RoleUpdateRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesUpdateRoleResp>
 
   /**
    * user add
@@ -260,6 +485,100 @@ export interface PureApiInterface {
  */
 export class PureApi extends runtime.BaseAPI implements PureApiInterface {
   /**
+   * menu add
+   * menu add logic
+   */
+  async menuAddRaw(
+    requestParameters: MenuAddRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesAddMenuResp>> {
+    if (requestParameters.body === null || requestParameters.body === undefined) {
+      throw new runtime.RequiredError(
+        'body',
+        'Required parameter requestParameters.body was null or undefined when calling menuAdd.',
+      )
+    }
+
+    const queryParameters: any = {}
+
+    const headerParameters: runtime.HTTPHeaders = {}
+
+    headerParameters['Content-Type'] = 'application/json'
+
+    const response = await this.request(
+      {
+        path: `/api/sys/menu/add`,
+        method: 'POST',
+        headers: headerParameters,
+        query: queryParameters,
+        body: TypesAddMenuReqToJSON(requestParameters.body),
+      },
+      initOverrides,
+    )
+
+    return new runtime.JSONApiResponse(response, (jsonValue) => TypesAddMenuRespFromJSON(jsonValue))
+  }
+
+  /**
+   * menu add
+   * menu add logic
+   */
+  async menuAdd(
+    requestParameters: MenuAddRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesAddMenuResp> {
+    const response = await this.menuAddRaw(requestParameters, initOverrides)
+    return await response.value()
+  }
+
+  /**
+   * menu delete
+   * menu delete logic
+   */
+  async menuDeleteRaw(
+    requestParameters: MenuDeleteRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesDeleteMenuResp>> {
+    if (requestParameters.body === null || requestParameters.body === undefined) {
+      throw new runtime.RequiredError(
+        'body',
+        'Required parameter requestParameters.body was null or undefined when calling menuDelete.',
+      )
+    }
+
+    const queryParameters: any = {}
+
+    const headerParameters: runtime.HTTPHeaders = {}
+
+    headerParameters['Content-Type'] = 'application/json'
+
+    const response = await this.request(
+      {
+        path: `/api/sys/menu/delete`,
+        method: 'POST',
+        headers: headerParameters,
+        query: queryParameters,
+        body: TypesDeleteMenuReqToJSON(requestParameters.body),
+      },
+      initOverrides,
+    )
+
+    return new runtime.JSONApiResponse(response, (jsonValue) => TypesDeleteMenuRespFromJSON(jsonValue))
+  }
+
+  /**
+   * menu delete
+   * menu delete logic
+   */
+  async menuDelete(
+    requestParameters: MenuDeleteRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesDeleteMenuResp> {
+    const response = await this.menuDeleteRaw(requestParameters, initOverrides)
+    return await response.value()
+  }
+
+  /**
    * menu list
    * menu list logic
    */
@@ -275,6 +594,10 @@ export class PureApi extends runtime.BaseAPI implements PureApiInterface {
 
     if (requestParameters.path !== undefined) {
       queryParameters['path'] = requestParameters.path
+    }
+
+    if (requestParameters.status !== undefined) {
+      queryParameters['status'] = requestParameters.status
     }
 
     const headerParameters: runtime.HTTPHeaders = {}
@@ -305,6 +628,243 @@ export class PureApi extends runtime.BaseAPI implements PureApiInterface {
     initOverrides?: RequestInit | runtime.InitOverrideFunction,
   ): Promise<TypesListMenuResp> {
     const response = await this.menuListRaw(requestParameters, initOverrides)
+    return await response.value()
+  }
+
+  /**
+   * menu update
+   * menu update logic
+   */
+  async menuUpdateRaw(
+    requestParameters: MenuUpdateRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesUpdateMenuResp>> {
+    if (requestParameters.body === null || requestParameters.body === undefined) {
+      throw new runtime.RequiredError(
+        'body',
+        'Required parameter requestParameters.body was null or undefined when calling menuUpdate.',
+      )
+    }
+
+    const queryParameters: any = {}
+
+    const headerParameters: runtime.HTTPHeaders = {}
+
+    headerParameters['Content-Type'] = 'application/json'
+
+    const response = await this.request(
+      {
+        path: `/api/sys/menu/update`,
+        method: 'POST',
+        headers: headerParameters,
+        query: queryParameters,
+        body: TypesUpdateMenuReqToJSON(requestParameters.body),
+      },
+      initOverrides,
+    )
+
+    return new runtime.JSONApiResponse(response, (jsonValue) => TypesUpdateMenuRespFromJSON(jsonValue))
+  }
+
+  /**
+   * menu update
+   * menu update logic
+   */
+  async menuUpdate(
+    requestParameters: MenuUpdateRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesUpdateMenuResp> {
+    const response = await this.menuUpdateRaw(requestParameters, initOverrides)
+    return await response.value()
+  }
+
+  /**
+   * role add
+   * role add logic
+   */
+  async roleAddRaw(
+    requestParameters: RoleAddRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesAddRoleResp>> {
+    if (requestParameters.body === null || requestParameters.body === undefined) {
+      throw new runtime.RequiredError(
+        'body',
+        'Required parameter requestParameters.body was null or undefined when calling roleAdd.',
+      )
+    }
+
+    const queryParameters: any = {}
+
+    const headerParameters: runtime.HTTPHeaders = {}
+
+    headerParameters['Content-Type'] = 'application/json'
+
+    const response = await this.request(
+      {
+        path: `/api/sys/role/add`,
+        method: 'POST',
+        headers: headerParameters,
+        query: queryParameters,
+        body: TypesAddRoleReqToJSON(requestParameters.body),
+      },
+      initOverrides,
+    )
+
+    return new runtime.JSONApiResponse(response, (jsonValue) => TypesAddRoleRespFromJSON(jsonValue))
+  }
+
+  /**
+   * role add
+   * role add logic
+   */
+  async roleAdd(
+    requestParameters: RoleAddRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesAddRoleResp> {
+    const response = await this.roleAddRaw(requestParameters, initOverrides)
+    return await response.value()
+  }
+
+  /**
+   * role delete
+   * role delete logic
+   */
+  async roleDeleteRaw(
+    requestParameters: RoleDeleteRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesDeleteRoleResp>> {
+    if (requestParameters.body === null || requestParameters.body === undefined) {
+      throw new runtime.RequiredError(
+        'body',
+        'Required parameter requestParameters.body was null or undefined when calling roleDelete.',
+      )
+    }
+
+    const queryParameters: any = {}
+
+    const headerParameters: runtime.HTTPHeaders = {}
+
+    headerParameters['Content-Type'] = 'application/json'
+
+    const response = await this.request(
+      {
+        path: `/api/sys/role/delete`,
+        method: 'POST',
+        headers: headerParameters,
+        query: queryParameters,
+        body: TypesDeleteRoleReqToJSON(requestParameters.body),
+      },
+      initOverrides,
+    )
+
+    return new runtime.JSONApiResponse(response, (jsonValue) => TypesDeleteRoleRespFromJSON(jsonValue))
+  }
+
+  /**
+   * role delete
+   * role delete logic
+   */
+  async roleDelete(
+    requestParameters: RoleDeleteRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesDeleteRoleResp> {
+    const response = await this.roleDeleteRaw(requestParameters, initOverrides)
+    return await response.value()
+  }
+
+  /**
+   * role list
+   * role list logic
+   */
+  async roleListRaw(
+    requestParameters: RoleListRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesListRoleResp>> {
+    const queryParameters: any = {}
+
+    if (requestParameters.name !== undefined) {
+      queryParameters['name'] = requestParameters.name
+    }
+
+    if (requestParameters.status !== undefined) {
+      queryParameters['status'] = requestParameters.status
+    }
+
+    const headerParameters: runtime.HTTPHeaders = {}
+
+    if (this.configuration && this.configuration.apiKey) {
+      headerParameters['Authorization'] = this.configuration.apiKey('Authorization') // ApiKeyAuth authentication
+    }
+
+    const response = await this.request(
+      {
+        path: `/api/sys/role/list`,
+        method: 'GET',
+        headers: headerParameters,
+        query: queryParameters,
+      },
+      initOverrides,
+    )
+
+    return new runtime.JSONApiResponse(response, (jsonValue) => TypesListRoleRespFromJSON(jsonValue))
+  }
+
+  /**
+   * role list
+   * role list logic
+   */
+  async roleList(
+    requestParameters: RoleListRequest = {},
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesListRoleResp> {
+    const response = await this.roleListRaw(requestParameters, initOverrides)
+    return await response.value()
+  }
+
+  /**
+   * role update
+   * role update logic
+   */
+  async roleUpdateRaw(
+    requestParameters: RoleUpdateRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TypesUpdateRoleResp>> {
+    if (requestParameters.body === null || requestParameters.body === undefined) {
+      throw new runtime.RequiredError(
+        'body',
+        'Required parameter requestParameters.body was null or undefined when calling roleUpdate.',
+      )
+    }
+
+    const queryParameters: any = {}
+
+    const headerParameters: runtime.HTTPHeaders = {}
+
+    headerParameters['Content-Type'] = 'application/json'
+
+    const response = await this.request(
+      {
+        path: `/api/sys/role/update`,
+        method: 'POST',
+        headers: headerParameters,
+        query: queryParameters,
+        body: TypesUpdateRoleReqToJSON(requestParameters.body),
+      },
+      initOverrides,
+    )
+
+    return new runtime.JSONApiResponse(response, (jsonValue) => TypesUpdateRoleRespFromJSON(jsonValue))
+  }
+
+  /**
+   * role update
+   * role update logic
+   */
+  async roleUpdate(
+    requestParameters: RoleUpdateRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TypesUpdateRoleResp> {
+    const response = await this.roleUpdateRaw(requestParameters, initOverrides)
     return await response.value()
   }
 
